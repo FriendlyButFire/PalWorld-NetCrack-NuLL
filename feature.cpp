@@ -510,7 +510,18 @@ void DismantleObjects()
 		{
 			SDK::APalMapObject* Object = static_cast<SDK::APalMapObject*>(Actor);
 
-			Config.GetPalPlayerCharacter()->GetPalPlayerController()->Transmitter->MapObject->RequestDismantleObject_ToServer(Object->ModelInstanceId);
+			SDK::FPalDamageInfo  info = SDK::FPalDamageInfo();
+			info.AttackElementType = SDK::EPalElementType::Normal;
+			info.Attacker = Config.GetPalPlayerCharacter();
+			info.AttackerGroupID = Config.GetPalPlayerState()->IndividualHandleId.PlayerUId;
+			info.AttackerLevel = 50;
+			info.AttackType = SDK::EPalAttackType::Weapon;
+			info.bApplyNativeDamageValue = true;
+			info.bAttackableToFriend = true;
+			info.IgnoreShield = true;
+			info.NativeDamageValue = 99999999999;
+
+			Config.GetPalPlayerCharacter()->GetPalPlayerController()->Transmitter->MapObject->RequestDamageMapObject_ToServer(Object->ModelInstanceId, info);
 		}
 		else if (Actor->IsA(SDK::APalGuildInfo::StaticClass()))
 		{

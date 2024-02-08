@@ -29,9 +29,10 @@ public:
 	bool matchDbItems = true;
 	bool isDebugESP = false;
 	bool bisOpenManager = false;
+	bool bisOpenMapObj = false;
 	bool filterPlayer = false;
 	bool filterPal = false;
-	bool isfilterSelf = true;
+	bool isfilterSelf = false;
 	bool bisRandomName = false;
 	bool bisTeleporter = false;
 	bool IsTeleportAllToXhair = false;
